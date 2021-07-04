@@ -1,2 +1,2 @@
 # Procfile
-web:gradle bootRun
+web:./gradlew bootRun
