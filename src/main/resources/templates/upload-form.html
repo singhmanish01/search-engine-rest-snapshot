@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label>Document Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="document_name"
+                    value={this.state.document_name}
+                    onChange={(e) => this.onChange(e)}
+                    placeholder="Document Name"
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label>Author/Editor</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="author"
+                    value={this.state.author}
+                    onChange={(e) => this.onChange(e)}
+                    placeholder="Author/Editor"
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label>Publisher</label>
+                  <input
+                    type="text"
+                    name="publisher"
+                    className="form-control"
+                    value={this.state.publisher}
+                    onChange={(e) => this.onChange(e)}
+                    placeholder="Publisher"
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label>Language</label>
+                  <select
+                    name="language"
+                    onChange={(e) => this.onChange(e)}
+                    value={this.state.language}
+                    className="form-control"
+                  >
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="sanskrit">Sanskrit</option>
+                    <option value="prakrut">Prakrut</option>
+                    <option value="gujarati">Gujarati</option>
+                  </select>
+                </div>
+                {/* <div className="form-group col-md-6">
+                  <label>Number Of Pages:</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    onChange={(e) => this.onChange(e)}
+                    value={this.state.number_of_pages}
+                    name="number_of_pages"
+                    placeholder="number of pages"
+                    min="0"
+                  />
+                </div> */}
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6 align-self-center">
+                  <label className="mr-3">Upload Document:</label>
+                  <input
+                    type="file"
+                    name="doc_file"
+                    onChange={(e) => this.onChange(e)}
+                  />
+                </div>
+                <div className="form-group col-md-6 align-self-center">
+                  <label>Do you want to make it public?</label>
+                  <br></br>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      value="true"
+                      onChange={(e) => this.onChange(e)}
+                      checked={this.state.isPublic === "true"}
+                      name="isPublic"
+                    />
+                    <label className="form-check-label">Yes</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      value="false"
+                      checked={this.state.isPublic === "false"}
+                      onChange={(e) => this.onChange(e)}
+                      name="isPublic"
+                    />
+                    <label className="form-check-label">No</label>
+                  </div>
+                </div>
+              </div>
+
+              {/* <div className="form-group files">
+                <label>Upload Your File </label>
+                <input type="file" className="form-control" multiple="" />
+              </div> */}
+
+              <div className="form-row mt-4">
+                {/* <button type="submit" className="btn shadow btn-success">
+                  Save <FontAwesomeIcon icon={faCheck} />
+                </button> */}
+
+                <button type="submit" className="btn shadow btn-success">
+                  Upload <FontAwesomeIcon className="ml-1" icon={faUpload} />
+                </button>
+
+                <Link
+                  className="btn ml-3 btn-danger shadow"
+                  to="/cataloger-dashboard"
+                >
+                  Cancel <FontAwesomeIcon className="ml-1" icon={faTimes} />
+                </Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

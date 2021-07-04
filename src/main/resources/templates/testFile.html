@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot Thymeleaf Application - Bootstrap Upload File</title>
+
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Upload File</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mt-5">
+
+            <div th:if="${message}">
+                <h2 th:text="${message}"/>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" action="/add-document" th:object="${doc}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="text" th:field="*{documentName}"
+                               class = "form-control mb-4 col-2" placeholder = "Document Name">
+                        <input type="text" th:field="*{authorName}"
+                               class = "form-control mb-4 col-2" placeholder = "Author/Editor">
+                        <input type="text" th:field="*{publication}"
+                               class = "form-control mb-4 col-2" placeholder = "Publication">
+                        <!--                        radio buton ispublic -->
+                        <select name="language">
+                            <option value="english">English</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="sanskrit">Sanskrit</option>
+                            <option value="prakrut">Prakrut</option>
+                            <option value="gujarati">Gujarati</option>
+                        </select><br>
+                        <label> Do you want to make it public ?</label>
+                        <input type="radio" th:field="*{isPublic}" value="1" th:checked="checked">Yes
+                        <input type="radio" th:field="*{isPublic}" value="0" th:checked="checked">No<br>
+                        <input type="file" class="custom-file-input" id="customFile" name="file">
+                        <label class="custom-file-label" for="customFile">Choose Document</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<script th:src="@{assets/custom-file-input/bs-custom-file-input.js}"></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+<script>
+    bsCustomFileInput.init();
+</script>
+
+</body>
+</html>
