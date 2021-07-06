@@ -36,7 +36,7 @@ public class WriteIndex {
         IndexWriter writer = createWriter();
         List<Document> documents = new ArrayList<>();
 
-        long id = 8;
+        long id = 1;
         while (documentService.findById(id)) {
             com.appperfect.searchengine.model.Document retrievedDoc = documentService.findDocumentById(id);
             if (retrievedDoc.getIsIndexed() || !(retrievedDoc.getIsPublic())) {
