@@ -69,7 +69,7 @@ public class DocumentService {
         try{
             byte[] bytes = file.getBytes();
             String upFile;
-            upFile = FileSystems.getDefault().getPath("DOCS").toAbsolutePath()+"\\"; //Paths.get("./DOCS" + FileSystems.getDefault().getSeparator()).normalize().toAbsolutePath().toString();
+            upFile = FileSystems.getDefault().getPath("DOCS").toAbsolutePath()+"/"; //Paths.get("./DOCS" + FileSystems.getDefault().getSeparator()).normalize().toAbsolutePath().toString();
             System.out.println("upload PATH: " + upFile);
             Path path = Paths.get(upFile + file.getOriginalFilename());
 //            Path path = Paths.get("E://KMS" + file.getOriginalFilename());
@@ -84,7 +84,7 @@ public class DocumentService {
         document.setDocumentName(documentDto.getDocumentName());
         document.setAuthorName(documentDto.getAuthorName());
         String upFile = "./DOCS/";
-        upFile = FileSystems.getDefault().getPath("DOCS").toAbsolutePath()+"\\"; //Paths.get("./DOCS" + FileSystems.getDefault().getSeparator()).normalize().toAbsolutePath().toString();
+        upFile = FileSystems.getDefault().getPath("DOCS").toAbsolutePath()+"/"; //Paths.get("./DOCS" + FileSystems.getDefault().getSeparator()).normalize().toAbsolutePath().toString();
         System.out.println("upload PATH: " + upFile);
         document.setDocumentFilePath(upFile + file.getOriginalFilename());
 //        document.setDocumentFilePath("E://KMS" + file.getOriginalFilename());
