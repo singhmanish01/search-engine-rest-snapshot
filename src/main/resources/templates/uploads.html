@@ -20,17 +20,25 @@
     </form>
 </nav>
 <div class="container">
-    <h2>My Uploads</h2> <form action="#" th:action="@{/add-language}"
+    <h2 style="margin-left: 1%; margin-top:2%;">My Uploads</h2><br> <form action="#" th:action="@{/add-language}"
           th:object="${lang}" method="POST">
+          <div class="form-group w-50">
         <input type="text" th:field="*{language}"
-               class = "form-control mb-4 col-2"/>
-        <button type="save" class = "btn btn-info col-2">Add Language</button>
+               class = "form-control mb-4 col-2" style="margin-left: 33%;"/></div>
+         <div class="btn1" style="margin-top: -7.5%; margin-left: -1%; padding: 2%;" >
+            <button type="save" class = "btn btn-info col-2">Add Language</button>
+        </div>
+        <br>
     </form> <form action="#" th:action="@{/add-document-type}"
           th:object="${ext}" method="POST">
+          <div class="form-group w-50">
         <input type="text" th:field="*{documentType}"
-               class = "form-control mb-4 col-2"/>
+               class = "form-control mb-4 col-2" style="margin-left: 33%;"/>
+          </div>
+          <div class="btn2" style="margin-top: -7.5%; margin-left: -1%; padding: 2%;" >
         <button type="save" class = "btn btn-info col-2">Add Document Type</button>
-    </form>
+    </div>
+    </form><br>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
