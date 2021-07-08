@@ -6,9 +6,6 @@
 }
 .input1{
 position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-    left: 45%;
+width: 100%;
+left: 45%;
 }
