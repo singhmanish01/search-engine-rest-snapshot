@@ -1,12 +1,14 @@
 .container1{
-    position: relative;
-  top: 5%;
+    position: absolute;
+  top: 24.5%;
   left: 22.5%;
   right: 22.5%;
 }
 .input1{
-   position: fixed;
-  top: 5%;
-  left: 22.5%;
-  right: 22.5%;
+position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    left: 45%;
 }
