@@ -1,11 +1,11 @@
 .container1{
-    position: relative;
+    position: fixed;
   top: 24.5%;
   left: 22.5%;
   right: 22.5%;
 }
 .input1{
-position: relative;
+position: fixed;
 width: 100%;
 left: 45%;
 }
