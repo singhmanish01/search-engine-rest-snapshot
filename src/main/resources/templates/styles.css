@@ -1,13 +1,8 @@
 .container1{
-  margin: 100px;
-/*   position: fixed;
-  top: 24.5%;
-  left: 22.5%; */
+     margin: 100px;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 70%;
+}
 
-}
-/* .input1{
-position: fixed;
-width: 50%;
-left: 45%;
-}
- */
