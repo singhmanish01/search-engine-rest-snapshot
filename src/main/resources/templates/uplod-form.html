@@ -20,17 +20,21 @@
         <a class="btn btn-outline-success me-2" th:href="@{/}">Home</a>
     </form>
 </nav>
+<br class="mt-5">
 <div class="container">
     <form method="POST" enctype="multipart/form-data" action="/add-document" th:object="${doc}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-        <div class="form-group">
-            <div class="mb-3 row">
+
+        <div class="form-group w-50 mx-auto">
+            <div class="mb-3 row ">
+
                 <input type="text" th:field="*{documentName}"
                        class="form-control form-control-lg mb-4" placeholder="Document Name">
                 <input type="text" th:field="*{authorName}"
                        class="form-control form-control-lg mb-4" placeholder="Author/Editor">
                 <input type="text" th:field="*{publication}"
                        class="form-control form-control-lg mb-4" placeholder="Publication">
+            
                 <!--                        radio buton ispublic -->
                 <select name="language">
                     <option value="english">English</option>
@@ -39,7 +43,8 @@
                     <option value="prakrut">Prakrut</option>
                     <option value="gujarati">Gujarati</option>
                 </select>
-                <label> Do you want to make it public ?</label>
+                <br class="mt-2">
+                <label>Do you want to make it public ?</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" th:field="*{isPublic}" value="1" type="radio"
                            name="flexRadioDefault" id="flexRadioDefault1" th:checked="checked">
@@ -57,13 +62,15 @@
                 <!--                        <label> Do you want to make it public ?</label>-->
                 <!--                        <input type="radio" th:field="*{isPublic}" value="1" th:checked="checked">Yes-->
                 <!--                        <input type="radio" th:field="*{isPublic}" value="0" th:checked="checked">No<br>-->
+                <br class="mt-3">
                 <div>
                     <input type="file" class="form-control" id="customFile" name="file">
                 </div>
             </div>
         </div>
-
+        <div class="text-center">
         <button class="btn btn-primary" type="submit">Upload</button>
+        </div>
     </form>
 </div>
 <script th:src="@{assets/custom-file-input/bs-custom-file-input.js}"></script>
