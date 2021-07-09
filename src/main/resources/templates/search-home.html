@@ -27,16 +27,21 @@
     </form>
 </nav>
 
-<div class="container-man"><!--container-->
-    <div class="input-man"><!--input-group mb-3 mx-auto-->
-        <form action="#" th:action="@{/search}">
-            <input th:name="query" type="text" class="form-control" placeholder="enter your document search"
-                   aria-label="enter your document search" aria-describedby="button-addon2">
-            <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
-        </form>
-    </div>
+<div class="container">
 
+    <div class="position-static">
+       <div class="position-absolute bottom-50 start-20 w-50">
+        <form action="#" th:action="@{/search}">
+<div class="input-group mb-3">
+  <input  th:name="query" type="text" class="form-control " placeholder="enter document search" aria-label="enter your document search" aria-describedby="button-addon2">
+  <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
 </div>
+	
+        </form>
+      </div>
+    </div>
+  </div>
+
 
 </body>
 </html>
