@@ -90,6 +90,19 @@ public class CatalogerControllerNew {
         return "register-form";
     }
 
+    //perform logout
+    @RequestMapping("/logout")
+    public String doLogout(HttpServletRequest request, HttpServletResponse response){        
+        HttpSession session = request.getSession(false);
+        SecurityContextHolder.clearContext();
+        session = request.getSession(false);
+        if (session != null)
+            session.invalidate();
+        for (Cookie cookie : request.getCookies())
+            cookie.setMaxAge(0);
+        return "redirect:/";
+    }
+    
     // register a new cataloger in database with encrypted password
     @PostMapping("/add-user")
     public String registerCataloger(@ModelAttribute("cat") Cataloger cataloger) {
