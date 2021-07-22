@@ -110,7 +110,25 @@ public class DocumentController {
         return new ResponseEntity<InputStreamResource>(
                 new InputStreamResource(pdfFile.getInputStream()), headers, HttpStatus.OK);
     }
+    
+    public Map<String, String> readMap() {
+        Map<String, String> map = new HashMap<>();
+        try (ObjectInputStream locFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream("count.dat")))) {
 
+            try {
+                map = (Map<String, String>) locFile.readObject();
+//                    System.out.println("Read location: "+loc.getLocationId()+": "+loc.getDescription());
+//                    System.out.println("Found "+(loc.getExits().size()-1)+" exits");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.out.println(" something gone wrong " + e.getMessage());
+            return new HashMap<>();
+        }
+        return map;
+    }
 //    @PostMapping("/edit-document")
 //    public ResponseEntity<?> editDocument(long documentId){
 //
