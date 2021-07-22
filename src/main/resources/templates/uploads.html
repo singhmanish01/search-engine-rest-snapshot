@@ -46,6 +46,7 @@
             <th>Publication Name</th>
             <th>Document Name</th>
             <th>Language</th>
+            <th>Downloads</th>
         </tr>
         </thead>
 
@@ -55,6 +56,7 @@
             <td th:text="${res.publication}" />
             <td th:text="${res.documentName}" />
             <td th:text="${res.language.language}" />
+            <td th:text="${map['__${res.id}__']}"/>
         </tr>
         </tbody>
     </table>
