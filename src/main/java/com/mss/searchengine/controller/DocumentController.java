@@ -53,9 +53,16 @@ public class DocumentController {
     }
     @GetMapping("/view-documents")
     public String retrieveDocumentOfCataloger(Model model){
+        Map<String,String> map = new HashMap<>(readMap());
+        
+        documentList.forEach(d->{
+            if(!map.containsKey(Long.toString(d.getId())))
+                map.put(Long.toString(d.getId()), "0");
+        });
         model.addAttribute("result",documentService.getAllDocumentByCatalogerId());
         model.addAttribute("lang",new Language());
         model.addAttribute("ext",new DocumentType());
+        model.addAttribute("map",map);
         return "uploads";
     }
 
