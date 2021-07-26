@@ -19,31 +19,47 @@
             display: none; 
             text-align :center;
         }
+
+        input[type=text],[type=password]{
+            width: 50%;
+        }
+        .center{
+            margin-left: 35.5%;
+        }
+        h3{
+            text-align: center;
+            margin-top: 2%;
+        }
+        p{
+            text-align: center;
+        }
     </style>
     <title>Employee Directory</title>
 </head>
 
 <body>
 <div class = "container">
+    
     <h3>New User Form</h3>
     <hr>
     <p class = "h4 mb-4">Save User</p>
-    <form action="#" th:action="@{/add-user}"
-          th:object="${cat}" method="POST">
-        <input type="text" th:field="*{firstName}" id="fname"
-               class = "form-control mb-4 col-2" placeholder = "First Name" required/>
-        <input type="text" th:field="*{lastName}" id="lname"
-               class = "form-control mb-4 col-2" placeholder = "Last Name" required/>
-        <input type="text" th:field="*{email}"
-               class = "form-control mb-4 col-2" placeholder = "email" required/>
-        <input type="password" th:field="*{password}" id="pswd1"
-               class = "form-control mb-4 col-2" placeholder = "password"/>
-        <span id="StrengthDisp" class="badge displayBadge">Weak</span>
-        <br>
-        <input type="password" id="pswd2"
-               class = "form-control mb-4 col-2" placeholder = "confirm password"/>
-        <button type="save" class = "btn btn-info col-2">Register</button>
-    </form>
+    <div class="center">
+        <form action="#" th:action="@{/add-user}"
+            th:object="${cat}" method="POST">
+            <input type="text" th:field="*{firstName}" id="fname"
+                class = "form-control mb-4 col-2" placeholder = "First Name" required/>
+            <input type="text" th:field="*{lastName}" id="lname"
+                class = "form-control mb-4 col-2" placeholder = "Last Name" required/>
+            <input type="text" th:field="*{email}"
+                class = "form-control mb-4 col-2" placeholder = "email" required/>
+            <input type="password" th:field="*{password}" id="pswd1"
+                class = "form-control mb-4 col-2" placeholder = "password"/>
+            <span id="StrengthDisp" class="badge displayBadge">Weak</span>
+            <input type="password" id="pswd2"
+                class = "form-control mb-4 col-2" placeholder = "confirm password"/>
+            <button type="save" class = "btn btn-info col-2">Register</button>
+        </form>
+    </div>
 
     <hr>
     <a th:href="@{/search}">Home</a>
