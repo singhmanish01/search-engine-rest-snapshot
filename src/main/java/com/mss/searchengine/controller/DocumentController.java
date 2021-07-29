@@ -32,6 +32,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 @Controller
 public class DocumentController {
@@ -58,6 +59,8 @@ public class DocumentController {
     public String retrieveDocumentOfCataloger(Model model){
         Map<String,String> map = new HashMap<>(readMap());
         List<Document> documentList = documentService.getAllDocumentByCatalogerId();
+        if(documentList == null)
+        	documentList = new ArrayList<>();
         documentList.forEach(d->{
             if(!map.containsKey(Long.toString(d.getId())))
                 map.put(Long.toString(d.getId()), "0");
