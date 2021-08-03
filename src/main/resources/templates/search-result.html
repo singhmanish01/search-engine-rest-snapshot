@@ -34,7 +34,7 @@
 					<th>Author Name</th>
 					<th>Publication Name</th>
 					<th>Document Name</th>
-					<th>Document Id</th>
+					<th>Media Type</th>
 					<th>Language</th>
 					<th>Link</th>
 				</tr>
@@ -45,7 +45,7 @@
 					<td th:text="${res.authorName}"/>
 					<td th:text="${res.publication}" />
 					<td th:text="${res.documentName}" />
-					<td th:text="${res.documentId}" />
+					<td th:text="${res.documentType}" />
 					<td th:text="${res.language}" />
 					<td><a class = "btn btn-primary btn-sm-mb-3"
 						   th:href="@{/download/document(documentId=${res.documentId})}">Download</a></td>

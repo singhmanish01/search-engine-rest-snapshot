@@ -53,6 +53,9 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser
 	implementation group: 'org.apache.lucene', name: 'lucene-queryparser', version: '8.8.0'
+	// https://mvnrepository.com/artifact/org.apache.tika/tika-core
+// https://mvnrepository.com/artifact/org.apache.tika/tika-core
+
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

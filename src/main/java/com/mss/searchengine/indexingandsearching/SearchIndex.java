@@ -2,6 +2,8 @@ package com.mss.searchengine.indexingandsearching;
 
 import com.mss.searchengine.constants.IndexConstants;
 import com.mss.searchengine.dto.SearchResponse;
+import com.mss.searchengine.service.DocumentService;
+
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -27,6 +29,9 @@ public class SearchIndex {
     @Autowired
     private IndexConstants indexConstants;
 
+    @Autowired
+    DocumentService documentService;
+    
     public SearchIndex() {
     }
 
@@ -47,6 +52,7 @@ public class SearchIndex {
             searchResponse.setPublication(d.get(indexConstants.publication));
             searchResponse.setLanguage(d.get(indexConstants.language));
             searchResponse.setDocumentId(d.get(indexConstants.documentId));
+            searchResponse.setDocumentType(documentService.findDocumentById(Long.parseLong(d.get(indexConstants.documentId))).getDocumentType().getDocumentType());            
             results.add(searchResponse);
         }
 

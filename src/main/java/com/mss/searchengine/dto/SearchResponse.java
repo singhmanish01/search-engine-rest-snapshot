@@ -13,4 +13,5 @@ public class SearchResponse {
     private String documentName;
     private String documentId;
     private String language;
+    private String documentType;
 }

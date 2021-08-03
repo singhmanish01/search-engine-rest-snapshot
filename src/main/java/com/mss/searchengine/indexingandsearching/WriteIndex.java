@@ -1,8 +1,15 @@
 package com.mss.searchengine.indexingandsearching;
 
-import com.mss.searchengine.constants.IndexConstants;
-import com.mss.searchengine.model.Language;
-import com.mss.searchengine.service.DocumentService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -11,15 +18,21 @@ import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Index;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import com.mss.searchengine.constants.IndexConstants;
+import com.mss.searchengine.model.Language;
+import com.mss.searchengine.service.DocumentService;
 
 @Component
 public class WriteIndex {
@@ -30,7 +43,7 @@ public class WriteIndex {
     @Autowired
     private IndexConstants indexConstants;
 
-    @Scheduled(fixedRate = 100000) // scheduled every 15 minutes
+    @Scheduled(fixedRate = 10000) // scheduled every 15 minutes
     public void indexing() throws Exception {
         System.out.println("I'm indexing");
         IndexWriter writer = createWriter();
@@ -43,12 +56,77 @@ public class WriteIndex {
                 id++;
                 continue;
             }
-
+            Set<String> extSet = new HashSet<>();
+            extSet.add("cpp");
+            extSet.add("txt");
+            extSet.add("plain");
+            extSet.add("java");
+            //extSet.add("docx");
+            StringBuilder sb;
             String path = retrievedDoc.getDocumentFilePath();
-            PdfManager pdfManager = new PdfManager();
-            pdfManager.setFilePath(path);
-            String content = pdfManager.toText();
-
+            String content;
+            /*if(extSet.contains(retrievedDoc.getDocumentType().getDocumentType())) {
+            	System.out.println("for text type");
+            	File newFile = new File(path);
+            	BufferedReader br = new BufferedReader(new FileReader(newFile));
+            	sb = new StringBuilder();
+            	String nextLine;
+            	while((nextLine = br.readLine())!= null)
+            		sb.append(nextLine);
+            	br.close();
+            	content = sb.toString();
+            }
+            else if(retrievedDoc.getDocumentType().getDocumentType().compareTo("docx") == 0) {
+            	FileInputStream fis = new FileInputStream(retrievedDoc.getDocumentFilePath());
+            	XWPFDocument doc = new XWPFDocument(fis);
+            	List<XWPFParagraph> para = doc.getParagraphs();
+            	sb = new StringBuilder();
+            	for(int i = 0;i<para.size();++i)
+            		sb.append(para.get(i).getText());
+            	doc.close();
+            	fis.close();
+            	content = sb.toString();
+            }
+            else if(retrievedDoc.getDocumentType().getDocumentType().compareTo("doc") == 0) {
+            	FileInputStream fis = new FileInputStream(retrievedDoc.getDocumentFilePath());
+            	HWPFDocument doc = new HWPFDocument(fis);
+            	WordExtractor we = new WordExtractor(doc);
+            	sb = new StringBuilder();
+            	for(int i = 0;i<para.size();++i)
+            		sb.append(para.get(i).getText());
+            	doc.close();
+            	fis.close();
+            	content = sb.toString();
+            }*/
+            if(retrievedDoc.getDocumentType().getDocumentType().compareTo("pdf") == 0){
+            	PdfManager pdfManager = new PdfManager();
+            	pdfManager.setFilePath(path);
+            	content = pdfManager.toText();
+            	String[] temp = (new File(path)).getName().split("\\W+");
+            	for(String s:temp) content = content + " " + s;
+            }
+            else if(retrievedDoc.getDocumentType().getDocumentType().compareTo("mp3") == 0 ||  retrievedDoc.getDocumentType().getDocumentType().compareTo("mp4")== 0) {
+            	String file = retrievedDoc.getDocumentFilePath();
+            	System.out.println("I'm mp3 | mp4.");        		
+        		Parser parser = new AutoDetectParser();
+        		BodyContentHandler handler = new BodyContentHandler();
+        		Metadata metadata = new Metadata();
+        		FileInputStream is = new FileInputStream(file);
+        		ParseContext context = new ParseContext();
+        		parser.parse(is, handler, metadata, context);
+        		String fileName = new File(retrievedDoc.getDocumentFilePath()).getName();
+        		String[] temp = fileName.split("\\W+");
+        		content = handler.toString() + " " + fileName;
+        		for(String s:temp) content = content + " " + s;
+        		System.out.println(content);        		
+            }            
+            else {
+            	String fileName = new File(retrievedDoc.getDocumentFilePath()).getName();
+        		String[] temp = fileName.split("\\W+");        		
+            	content = readDoc(retrievedDoc.getDocumentFilePath());
+            	for(String s:temp) content = content + " " + s;
+            }
+            System.out.println("file has - " + content);
             Language language =  retrievedDoc.getLanguage();
             String lang = language.getLanguage();
             System.out.println("language is: " + lang);
@@ -84,5 +162,17 @@ public class WriteIndex {
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
         return new IndexWriter(dir, config);
     }
+    
+    private String readDoc(String path) {
+    	Metadata metadata = new Metadata();
+    	File file = new File(path);
+    	try (InputStream in = TikaInputStream.get(file, metadata))  {
+    	    Tika tika = new Tika();
 
+    	    return tika.parseToString(in, metadata, -1);
+    	} catch (IOException | TikaException e) {
+    	    return e.getMessage();
+    	}
+    }
+    
 }

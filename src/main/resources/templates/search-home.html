@@ -1,48 +1,58 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://github.com/singhmanish01/css/blob/main/styles.css">
-    <title>Search Engine Home</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://github.com/singhmanish01/css/blob/main/styles.css">
+<title>Search Engine Home</title>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <!-- Navbar content -->
-    <form class="container-fluid justify-content-start">
-        <a class="btn btn-outline-success me-2" th:href="@{/}">Home</a>
-        <div sec:authorize="not isAuthenticated()">
-            <a class="btn btn-sm btn-outline-secondary" th:href="@{/showMyLoginPage}">Login</a>
-            <a class="btn btn-sm btn-outline-secondary" th:href="@{/register}">Register</a>
-        </div>
-        <div sec:authorize="isAuthenticated()">
-            <a class="btn btn-sm btn-outline-secondary" th:href="@{/view-documents}">Cataloger Home</a>
-	    <a class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">Logout</a>
-        </div>
-    </form>
-</nav>
+	<nav class="navbar navbar-dark bg-dark">
+		<!-- Navbar content -->
+		<form class="container-fluid justify-content-start">
+			<a class="btn btn-outline-success me-2" th:href="@{/}">Home</a>
+			<div sec:authorize="not isAuthenticated()">
+				<a class="btn btn-sm btn-outline-secondary"
+					th:href="@{/showMyLoginPage}">Login</a> <a
+					class="btn btn-sm btn-outline-secondary" th:href="@{/register}">Register</a>
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<a class="btn btn-sm btn-outline-secondary"
+					th:href="@{/view-documents}">Cataloger Home</a> <a
+					class="btn btn-sm btn-outline-secondary" th:href="@{/logout}">Logout</a>
+			</div>
+		</form>
+	</nav>
 
-<div class="container">
+	<div class="container">
 
-    <div class="position-static">
-       <div class="position-absolute bottom-50 start-20 w-50">
-        <form action="#" th:action="@{/search}">
-<div class="input-group mb-3">
-  <input  th:name="query" type="text" class="form-control " placeholder="enter document search" aria-label="enter your document search" aria-describedby="button-addon2">
-  <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
-</div>
-	
-        </form>
-      </div>
-    </div>
-  </div>
+		<div class="position-static">
+			<div class="position-absolute bottom-50 start-20 w-50">
+				<form action="#" th:action="@{/search}">
+					<div class="input-group mb-3">
+						<input th:name="query" type="text" class="form-control "
+							placeholder="enter document search"
+							aria-label="enter your document search"
+							aria-describedby="button-addon2"
+							style="z-index: 100; position: relative; box-shadow: 0px 8px 8px 6px rgba(61, 61, 61, 0.2); box-sizing: border-box; border-radius: 14px 0px 0px 14px;">
+						<button class="btn btn-dark" type="submit" id="button-addon2"
+							style="box-sizing: border-box; border-radius: 0px 14px 14px 0px; box-shadow: 0px 8px 8px 6px rgba(58, 57, 57, 0.2);">Search</button>
+					</div>
 
-
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

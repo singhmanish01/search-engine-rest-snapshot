@@ -1,5 +1,6 @@
 package com.mss.searchengine.security;
 
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,18 @@ import java.util.Map;
 public class CustomeInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        String documentId = request.getParameter("documentId");
+//        Map<String,String> map = readMap();
+//        System.out.println("\n\n\n\n\nprinting loaded map- ");
+//        for(String key: map.keySet())
+//            System.out.println(key + " " +map.get(key));
+//        System.out.println("\n\n");
+//        writeMap(map,documentId);
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String documentId = request.getParameter("documentId");
         Map<String,String> map = readMap();
         System.out.println("\n\n\n\n\nprinting loaded map- ");
@@ -18,8 +31,8 @@ public class CustomeInterceptor extends HandlerInterceptorAdapter {
             System.out.println(key + " " +map.get(key));
         System.out.println("\n\n");
         writeMap(map,documentId);
-        return true;
     }
+
     public Map<String, String> readMap() {
         Map<String, String> map = new HashMap<>();
         try (ObjectInputStream locFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream("count.dat")))) {
@@ -39,7 +52,8 @@ public class CustomeInterceptor extends HandlerInterceptorAdapter {
         return map;
     }
 
-    public void writeMap(Map<String,String> map,String key) {
+    public static void writeMap(Map<String,String> map,String key) {
+
         int value = Integer.parseInt(map.getOrDefault(key,"0")) + 1;
         map.put(key,Integer.toString(value));
         try (ObjectOutputStream locFile = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("count.dat")))) {
